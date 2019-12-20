@@ -4,10 +4,10 @@
 
 #include <stdio.h>
 #include <string.h>
+#include "textSearch.h"
 
 #define LINE 256
 #define  LINES 1000
-#define WORD 30
 
 int getLine(char s[]) {
     int c, j = 0;
@@ -40,7 +40,7 @@ int substring(char *str1, char *str2) {
         return 1;
 
     char *p1, *p2, *p3;
-    int i = 0, j = 0, flag = 0;
+    int i = 0, j = 0;
     p1 = str1;
     p2 = str2;
 
@@ -56,7 +56,6 @@ int substring(char *str1, char *str2) {
             }
             p2 = str2; // return to index 0 of str2
             if (j == strlen(str2)) {
-                flag = 1;
                 //printf("\nSubstring found at index : %d\n",i);
                 return 1;
             }
@@ -79,7 +78,6 @@ void print_lines(char *str) {
 
 void removeChars(char *s, int i, int len, char *newStr) {
     char str1[WORD] = "";
-    char str2[WORD] = "";
     int j;
     for (j = 0; j < i; j++) {
         str1[j] = *(s + j);
@@ -102,6 +100,7 @@ void removeChars(char *s, int i, int len, char *newStr) {
         p2++;
         p1++;
     }
+    *p2 = '\0';
 }
 
 int similar(char *s, char *t) {
@@ -126,7 +125,7 @@ int similar(char *s, char *t) {
     if (lenS >= lenT) { // If length of s is greater.
         while (j <= lenT) {
             int index = j;
-            char temp[] = "";
+            char temp[WORD] = "";
             removeChars(s, index, lenS, temp); //need to check all options by removing chars.
             if (substring(t, temp))
                 return 1;

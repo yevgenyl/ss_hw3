@@ -4,6 +4,7 @@
 
 #ifndef SS_HW3_TEXTSEARCH_H
 #define SS_HW3_TEXTSEARCH_H
+#define WORD 30
 
 int getLine(char s[]);
 int getWord(char w[]);
